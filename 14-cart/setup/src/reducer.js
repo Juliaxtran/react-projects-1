@@ -40,6 +40,21 @@ const reducer = (state, action) => {
     }
   }
 
+  if(action.type === 'GET_TOTAL') {
+    const  {total, amount} = state.cart.reduce((cartTotal, cartItem) => {
+      cartTotal.total += cartItem.price * cartItem.amount;
+      cartTotal.amount += cartItem.amount;
+      return cartTotal;
+    }, {total: 0, amount: 0})
+
+
+    return {
+      ...state,
+      total,
+      amount
+    }
+  }
+
 
 
   return state
